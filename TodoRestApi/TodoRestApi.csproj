@@ -114,6 +114,7 @@
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Dto\CreateTaskDto.cs" />
+    <Compile Include="Dto\FilterTaskDto.cs" />
     <Compile Include="Dto\InviteDto.cs" />
     <Compile Include="Dto\RegisterDto.cs" />
     <Compile Include="Dto\TeamDto.cs" />

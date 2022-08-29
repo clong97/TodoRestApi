@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -25,21 +22,29 @@ namespace TodoRestApi.Controllers
         [ResponseType(typeof(Task))]
         [HttpGet]
         [Route("getAllTask")]
-        public IQueryable<Task> GetAllTasks(string sort = "id")
+        public IQueryable<Task> GetAllTasks([FromUri]FilterTaskDto filter, string sort = "id")
         {
             string username = Thread.CurrentPrincipal.Identity.Name;
             IQueryable<int> idList = db.TeamMembers.Where(tm => tm.User.Username == username && tm.Status == Constant.STATUS_ACTIVE).Select(tm => tm.TeamId);
+            IQueryable<Task> tasks = db.Tasks.Where(t => (t.User1.Username == username || t.User.Username == username) && (t.Team == null || idList.Contains((int)t.TeamId)));
 
-            return db.Tasks.Where(t => t.User1.Username == username || t.User.Username == username || idList.Contains((int)t.TeamId)).ApplySort(sort);
+            tasks = filterTask(tasks, filter).ApplySort(sort);
+
+            return tasks;
         }
 
         [ResponseType(typeof(Task))]
         [HttpGet]
         [Route("getMyTasks")]
-        public IQueryable<Task> GetMyTasks(string sort = "id")
+        public IQueryable<Task> GetMyTasks([FromUri]FilterTaskDto filter, string sort = "id")
         {
             string username = Thread.CurrentPrincipal.Identity.Name;
-            return db.Tasks.Where(t => (t.User == null && t.User1.Username == username) || (t.User.Username == username)).ApplySort(sort);
+            IQueryable<int> idList = db.TeamMembers.Where(tm => tm.User.Username == username && tm.Status == Constant.STATUS_ACTIVE).Select(tm => tm.TeamId);
+            IQueryable<Task> tasks = db.Tasks.Where(t => ((t.User == null && t.User1.Username == username) || t.User.Username == username) && (t.Team == null || (t.Team != null && idList.Contains((int)t.TeamId))));
+
+            tasks = filterTask(tasks, filter).ApplySort(sort);
+
+            return tasks;
         }
 
         [ResponseType(typeof(Task))]
@@ -54,7 +59,8 @@ namespace TodoRestApi.Controllers
             }
 
             string username = Thread.CurrentPrincipal.Identity.Name;
-            if (task.User.Username == username || (task.User1.Username == username && task.User == null))
+            IQueryable<int> idList = db.TeamMembers.Where(tm => tm.User.Username == username && tm.Status == Constant.STATUS_ACTIVE).Select(tm => tm.TeamId);
+            if ((task.User.Username == username || (task.User1.Username == username && task.User == null)) && (task.Team == null || (task.Team != null && idList.Contains((int)task.TeamId))))
             {
                 return Ok(task);
             }
@@ -171,11 +177,59 @@ namespace TodoRestApi.Controllers
             return BadRequest(ModelState);
         }
 
-        // TODO: Deactivate Task
-
         private bool TaskExists(int id)
         {
             return db.Tasks.Count(e => e.Id == id) > 0;
+        }
+
+        private IQueryable<Task> filterTask(IQueryable<Task> tasks, FilterTaskDto filter)
+        {
+            if (!string.IsNullOrEmpty(filter.Name))
+            {
+                tasks = tasks.Where(t => t.Name == filter.Name);
+            }
+
+            if (!string.IsNullOrEmpty(filter.Priority))
+            {
+                tasks = tasks.Where(t => t.Priority == filter.Priority);
+            }
+
+            if (!string.IsNullOrEmpty(filter.Status))
+            {
+                tasks = tasks.Where(t => t.Status == filter.Status);
+            }
+
+            if (!string.IsNullOrEmpty(filter.CreatedBy))
+            {
+                User createdBy = db.Users.Find(filter.CreatedBy);
+                tasks = tasks.Where(t => t.User1 == createdBy);
+            }
+
+            if (!string.IsNullOrEmpty(filter.AssigneeId))
+            {
+                int assigneeId = int.Parse(filter.AssigneeId);
+                tasks = tasks.Where(t => t.Assignee == assigneeId);
+            }
+
+            if (!string.IsNullOrEmpty(filter.TeamId))
+            {
+                int teamId = int.Parse(filter.TeamId);
+                tasks = tasks.Where(t => t.TeamId == teamId);
+            }
+
+            if (!string.IsNullOrEmpty(filter.StartDate))
+            {
+                DateTime startDate = DateTime.ParseExact(filter.StartDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                tasks = tasks.Where(t => DbFunctions.TruncateTime(t.StartDate) == startDate);
+            }
+
+            if (!string.IsNullOrEmpty(filter.DueDate))
+            {
+                DateTime dueDate = DateTime.ParseExact(filter.DueDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                tasks = tasks.Where(t => DbFunctions.TruncateTime(t.DueDate) == dueDate);
+            }
+
+            return tasks;
         }
     }
 }

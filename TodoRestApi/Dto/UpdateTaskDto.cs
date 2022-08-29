@@ -9,7 +9,7 @@ namespace TodoRestApi.Dto
         public string Description { get; set; }
         [RegularExpression("^(Low|Medium|High)$", ErrorMessage = "Only Low, Medium, High are allowed.")]
         public string Priority { get; set; }
-        [RegularExpression("^(New|In-Progress|On-Hold|Completed)$", ErrorMessage = "Only New, In-Progress, On-Hold, Completed are allowed.")]
+        [RegularExpression("^(New|In-Progress|On-Hold|Cancelled|Completed)$", ErrorMessage = "Only New, In-Progress, On-Hold, Cancelled, Completed are allowed.")]
         public string Status { get; set; }
         [Range(0,100, ErrorMessage = "Only 0 to 100 allowed.")]
         public Nullable<int> Progress { get; set; }
