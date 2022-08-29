@@ -12,3 +12,9 @@
 
 ### Postman Collection
 https://www.getpostman.com/collections/a28bbed575df4d13224a
+
+### Important ❗❗
+Please register a user first before proceed with other APIs.
+- method: POST
+- name: /api/account/register
+- sample body: { "Name": "user name", "Username": "user1", "Password": "abc123" }
