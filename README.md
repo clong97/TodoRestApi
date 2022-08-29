@@ -9,7 +9,8 @@
 - ✔️Team Features
 
 ### Postman Collection
-https://www.getpostman.com/collections/a28bbed575df4d13224a
+- https://www.getpostman.com/collections/a28bbed575df4d13224a
+- TodoRestApi.postman_collection.json
 
 ### Important ❗❗
 Please register a user first before proceed with other APIs.
