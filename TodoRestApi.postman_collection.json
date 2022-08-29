@@ -1,0 +1,724 @@
+{
+	"info": {
+		"_postman_id": "f70b03df-5af1-4d3c-a442-b1380b367b71",
+		"name": "TodoRestApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:54275/api/account/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Adrian\",\r\n    \"Username\": \"clong97\",\r\n    \"Password\": \"abc123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:54275/api/account/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"account",
+						"register"
+					]
+				},
+				"description": "User registration to be used as Basic Auth for other requests.\r\nSample request: \r\n{\r\n    \"Name\": \"Adrian\",\r\n    \"Username\": \"clong97\",\r\n    \"Password\": \"abc123\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/team/getMyTeams",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "clong97",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:54275/api/team/getMyTeams",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"team",
+						"getMyTeams"
+					]
+				},
+				"description": "Get all the teams the user joined or owned."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/team/getMyTeam/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "clong97",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:54275/api/team/getMyTeam/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"team",
+						"getMyTeam",
+						"1"
+					]
+				},
+				"description": "Get the particular team the user joined or owned."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/team/createTeam",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "clong97",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Other\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:54275/api/team/createTeam",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"team",
+						"createTeam"
+					]
+				},
+				"description": "Create a new team.\r\nSample request:\r\n{\r\n    \"Name\": \"Other\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/team/updateMyTeam/1",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mwmc97",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Testing 123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:54275/api/team/updateMyTeam/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"team",
+						"updateMyTeam",
+						"1"
+					]
+				},
+				"description": "Update the team that the user owned.\r\nSample request:\r\n{\r\n    \"Name\": \"Testing 123\"\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/team/deactivateTeam/1",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "clong97",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:54275/api/team/deactivateTeam/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"team",
+						"deactivateTeam",
+						"1"
+					],
+					"query": [
+						{
+							"key": "Name",
+							"value": "Family",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Deactivate the team that the user owned. This will deactivate all the members that joined the team and cancel all the tasks created under the team except completed tasks."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/team/getMyTeam/1/members",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "clong97",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:54275/api/team/getMyTeam/1/members",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"team",
+						"getMyTeam",
+						"1",
+						"members"
+					]
+				},
+				"description": "Get the team's members that the user joined or owned."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/team/inviteMember",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "clong97",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"mwmc97\",\r\n    \"TeamId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:54275/api/team/inviteMember",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"team",
+						"inviteMember"
+					]
+				},
+				"description": "Invite a user to join the team as member.\r\nSample request: \r\n{\r\n    \"Username\": \"mwmc97\",\r\n    \"TeamId\": 2\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/team/acceptInvitation/2",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mwmc97",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:54275/api/team/acceptInvitation/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"team",
+						"acceptInvitation",
+						"2"
+					]
+				},
+				"description": "Accept Team invitation"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/team/rejectInvitation/3",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mwmc97",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:54275/api/team/rejectInvitation/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"team",
+						"rejectInvitation",
+						"3"
+					]
+				},
+				"description": "Reject Team invitation."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/team/leaveTeam/2",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mwmc97",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:54275/api/team/leaveTeam/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"team",
+						"leaveTeam",
+						"2"
+					]
+				},
+				"description": "Leave the Team."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/team/getMyInvitations",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "mwmc97",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:54275/api/team/getMyInvitations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"team",
+						"getMyInvitations"
+					]
+				},
+				"description": "Get the Team invitations"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/task/getMyTasks?sort=id",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "clong97",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:54275/api/task/getMyTasks?sort=id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"task",
+						"getMyTasks"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "id"
+						}
+					]
+				},
+				"description": "Get all the tasks owned by the user. \r\nCreatedBy userA without assignee is considered owned by the userA.\r\nCreatedBy userA with assignee on another user is considered not owned by the userA.\r\nSorting supported, append ?sort= to the end of the url. Use '-' for descending sort.\r\nFiltering supported, append the field(s) to the end.\r\n{Supported field: Name, Priority (\"Low\", \"Medium\", \"High\"), Status (\"New\", \"In-Progress\", \"On-Hold\", \"Cancelled\", \"Completed\"), CreatedBy, AssigneeId, TeamId, CreatedDate (DD/MM/YYYY), StartDate (DD/MM/YYYY), DueDate (DD/MM/YYYY)}\r\nSample request: http://localhost:54275/api/task/getMyTasks?sort=name&StartDate=27/08/2022"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/task/getMyTask/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:54275/api/task/getMyTask/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"task",
+						"getMyTask",
+						"1"
+					]
+				},
+				"description": "Get the particular task the user owned."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/task/getAllTask?sort=Id",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "mwmc97",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:54275/api/task/getAllTask?sort=Id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"task",
+						"getAllTask"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "Id"
+						}
+					]
+				},
+				"description": "Get all the tasks related to the user or team. \r\nSorting supported, append ?sort= to the end of the url. Use '-' for descending sort.\r\nFiltering supported, append the field(s) to the end.\r\n{Supported field: Name, Priority (\"Low\", \"Medium\", \"High\"), Status (\"New\", \"In-Progress\", \"On-Hold\", \"Cancelled\", \"Completed\"), CreatedBy, AssigneeId, TeamId, CreatedDate (DD/MM/YYYY), StartDate (DD/MM/YYYY), DueDate (DD/MM/YYYY)}\r\nSample request: http://localhost:54275/api/task/getAllTask?sort=name&StartDate=27/08/2022"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/task/createTask",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "clong97",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"My First Task\",\r\n    \"Description\": \"This is my First task. Need to test API.\",\r\n    \"Priority\": \"Low\",\r\n    \"StartDate\": \"27/08/2022 00:00:00\",\r\n    \"DueDate\": \"29/08/2022 23:59:59\",\r\n    \"AssigneeId\": 1,\r\n    \"TeamId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:54275/api/task/createTask",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"task",
+						"createTask"
+					]
+				},
+				"description": "Create new task. \r\nOptional: Description, StartDate, DueDate, AssigneeId, TeamId\r\nSample request: \r\n{\r\n    \"Name\": \"My First Task\",\r\n    \"Description\": \"This is my First task. Need to test API.\",\r\n    \"Priority\": \"Low\",\r\n    \"StartDate\": \"27/08/2022 00:00:00\",\r\n    \"DueDate\": \"29/08/2022 23:59:59\",\r\n    \"AssigneeId\": 1,\r\n    \"TeamId\": 1\r\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:54275/api/task/updateMyTask/1",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "clong97",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "abc123",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Status\": \"In-Progress\",\r\n    \"Progress\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:54275/api/task/updateMyTask/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54275",
+					"path": [
+						"api",
+						"task",
+						"updateMyTask",
+						"1"
+					]
+				},
+				"description": "Update the task owned by the user. \r\nOptional: Name, Description, Priority, Status, Progress, StartDate, DueDate, AssigneeId\r\nSample request: \r\n{\r\n    \"Status\": \"In-Progress\",\r\n    \"Progress\": 50\r\n}"
+			},
+			"response": []
+		}
+	]
+}
